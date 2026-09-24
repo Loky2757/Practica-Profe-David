@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mi Mapa Interactivo</title>
+<!-- Aquí irá el CSS -->
+<style>
+body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f4;}
+
+/* Contenedor del mapa */
+.mapa-contenedor {
+max-width: 800px;
+margin: 0 auto;
+background-color: #f80000; /* Aquí podrías poner tu imagen de fondo original
+usando CSS */
+box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* PASO 6: Magia CSS para los lotes */
+/* Todos los elementos dentro del SVG que tengan ID que empiece con "lote" */
+/* Lotes disponibles (Verde) */
+.lote-disponible {
+fill: rgba(46, 204, 113, 0.5);
+cursor: pointer;
+transition: 0.3s ease;
+}
+.lote-disponible:hover {
+fill: rgba(46, 204, 113, 0.9);
+}
+/* Lotes vendidos o reservados (Rojo/Gris) - Sin evento hover */
+.lote-vendido {
+fill: rgba(231, 76, 60, 0.7);
+cursor: not-allowed;
+}
+
+/* Diseño de la ventana modal (oculta por defecto) */
+.modal {
+display: none; /* Oculto inicialmente */
+position: fixed; top: 50%; left: 50%;
+transform: translate(-50%, -50%);
+background: white; padding: 30px; border-radius: 10px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+z-index: 1000;
+}
+.modal-overlay {
+display: none;
+position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+background: rgba(0,0,0,0.5); z-index: 999;
+}
+button { padding: 10px 20px; background: #e74c3c; color: white; border: none;
+cursor: pointer; border-radius: 5px; }
+</style>
+</head>
+<body>
+
+<h1>Mapa de Lotes Disponibles</h1>
+
+<div class="mapa-contenedor">
+<svg id="lote" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        opacity: .5;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <path id="lote6" class="cls-1" d="m933.52,423.52v208.08h134.64v-97.2l-72.72,1.44-1.44-112.32h-60.48Z"/>
+  <rect id="lote5" class="cls-1" x="1000.84" y="460.24" width="67.32" height="59.76"/>
+  <rect id="lote4" class="cls-1" x="933.52" y="356" width="63.36" height="60.32"/>
+  <rect id="lote3" class="cls-1" x="1000.84" y="356" width="67.32" height="86.96"/>
+  <rect id="lote2" class="cls-1" x="791.68" y="356" width="133.92" height="99.2"/>
+  <rect id="lote1" class="cls-1" x="791.68" y="463.84" width="133.92" height="167.76"/>
+</svg>
+</div>
+
+<!-- Nuestra ventana Modal -->
+<!-- Ventana Modal -->
+<div class="modal-overlay" id="fondo-modal"></div>
+<div class="modal" id="mi-modal">
+<h2 id="titulo-lote">Nombre del Lote</h2>
+<p>Estado: <strong id="estado-lote">---</strong></p>
+<p>Área: <span id="area-lote">---</span> m2</p>
+<p>Precio: <strong id="precio-lote">---</strong></p>
+
+<!-- Botón para cerrar y el NUEVO botón para reservar -->
+<button id="btn-cerrar">Cerrar</button>
+<button id="btn-reservar" style="background: #2ecc71;">Reservar
+Lote</button>
+</div>
+
+<!-- PASO 7: Lógica de JavaScript -->
+<script src="main.js"></script>
+</body>
+</html>
