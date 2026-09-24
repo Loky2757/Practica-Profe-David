@@ -15,13 +15,13 @@ JSON.parse(window.localStorage.getItem('mapaLotesGuardado'));
 // 3. PINTAR EL MAPA SEGÚN LOS DATOS
       function actualizarColoresMapa() {
 // Recorremos cada lote en nuestra base de datos
-for (const idLote in datosLotes) {
-const elementoSVG = document.getElementById(idLote);
+for (const idlote in datosLotes) {
+const elementoSVG = document.getElementById(idlote);
 if (elementoSVG) {
 // Limpiamos clases anteriores
 elementoSVG.classList.remove('lote-disponible', 'lote-vendido');
 // Asignamos la nueva clase según su estado
-if (datosLotes[idLote].estado === "disponible") {
+if (datosLotes[idlote].estado === "disponible") {
 elementoSVG.classList.add('lote-disponible');
 } else {
 elementoSVG.classList.add('lote-vendido');
@@ -40,18 +40,18 @@ const btnCerrar = document.getElementById('btn-cerrar');
 const btnReservar = document.getElementById('btn-reservar');
 lotesSVG.forEach(lote => {
 lote.addEventListener('click', function() {
-const idLote = this.getAttribute('id');
-const infoLote = datosLotes[idLote];
+const idlote = this.getAttribute('id');
+const infolote = datosLotes[idlote];
 // Si el lote no está en la base de datos, lo ignoramos
-if (!infoLote) return;
+if (!infolote) return;
 // Guardamos en la memoria qué lote abrimos
-loteSeleccionadoActual = idLote;
+loteSeleccionadoActual = idlote;
 // Inyectamos los datos en el HTML
-document.getElementById('titulo-lote').innerText = idLote.replace('-', '').toUpperCase();
+document.getElementById('titulo-lote').innerText = idlote.replace('-', '').toUpperCase();
 document.getElementById('estado-lote').innerText =
 infoLote.estado.toUpperCase();
-document.getElementById('area-lote').innerText = infoLote.area;
-document.getElementById('precio-lote').innerText = infoLote.precio;
+document.getElementById('area-lote').innerText = infolote.area;
+document.getElementById('precio-lote').innerText = infolote.precio;
 // Lógica visual para el botón de reservar
 if (infoLote.estado === "vendido") {
 btnReservar.style.display = 'none'; // Ocultar si ya está vendido
@@ -80,6 +80,8 @@ cerrarModal();
 function cerrarModal() {
 modal.style.display = 'none';
 overlay.style.display = 'none';
-}
-btnCerrar.addEventListener('click', cerrarModal);
-overlay.addEventListener('click', cerrarModal);
+            }
+
+  btnCerrar.addEventListener('click', cerrarModal);
+
+  overlay.addEventListener('click', cerrarModal);
