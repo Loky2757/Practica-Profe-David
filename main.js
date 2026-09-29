@@ -1,16 +1,16 @@
 let datosLotes = {
-"lote-1": { precio: "$500,000 MXN", area: 250, estado: "disponible" },
-"lote-2": { precio: "$550,000 MXN", area: 275, estado: "vendido" },
-"lote-3": { precio: "$480,000 MXN", area: 240, estado: "disponible" }
+"lote1": { precio: "$500,000 MXN", area: 250, estado: "disponible" },
+"lote2": { precio: "$550,000 MXN", area: 275, estado: "vendido" },
+"lote3": { precio: "$480,000 MXN", area: 240, estado: "disponible" }
 };
 // Variable para recordar qué lote acabamos de clickear
 let loteSeleccionadoActual = "";
 // 2. RECUPERAR DATOS GUARDADOS
 // Al recargar la página, el script debe leer el localStorage primero.
-if (window.localStorage.getItem('mapaLotesGuardado')) {
+if (window.localStorage.getItem('mapa-contenedor')) {
 // Si hay datos guardados previamente, los cargamos
 datosLotes =
-JSON.parse(window.localStorage.getItem('mapaLotesGuardado'));
+JSON.parse(window.localStorage.getItem('mapa-contenedor'));
  }
 // 3. PINTAR EL MAPA SEGÚN LOS DATOS
       function actualizarColoresMapa() {
@@ -49,11 +49,11 @@ loteSeleccionadoActual = idlote;
 // Inyectamos los datos en el HTML
 document.getElementById('titulo-lote').innerText = idlote.replace('-', '').toUpperCase();
 document.getElementById('estado-lote').innerText =
-infoLote.estado.toUpperCase();
+infolote.estado.toUpperCase();
 document.getElementById('area-lote').innerText = infolote.area;
 document.getElementById('precio-lote').innerText = infolote.precio;
 // Lógica visual para el botón de reservar
-if (infoLote.estado === "vendido") {
+if (infolote.estado === "vendido") {
 btnReservar.style.display = 'none'; // Ocultar si ya está vendido
 } else {
 btnReservar.style.display = 'inline-block'; // Mostrar si está
@@ -69,7 +69,7 @@ btnReservar.addEventListener('click', function() {
 // 1. Cambiar el valor del estado en el objeto JSON de "disponible" a"vendido"[cite: 2].
 datosLotes[loteSeleccionadoActual].estado = "vendido";
 // 2. Guardamos los cambios en el disco duro del navegador(LocalStorage)[cite: 2].
-window.localStorage.setItem('mapaLotesGuardado',
+window.localStorage.setItem('mapa-contenedor',
 JSON.stringify(datosLotes));
 // 3. Actualizamos el DOM (los colores del mapa) en tiempo real[cite: 2].
 actualizarColoresMapa();
